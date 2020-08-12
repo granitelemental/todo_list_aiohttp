@@ -43,7 +43,7 @@ Response example:
 
 - `GET /?status=active` - returns json with all active tasks.
 
-- `GET /?status=active` - returns json with all done tasks.
+- `GET /?status=done` - returns json with all done tasks.
 
 - `DELETE /` - deletes all tasks from database.
 
