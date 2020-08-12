@@ -13,6 +13,8 @@ app = web.Application(loop=loop)
 index_resource = app.router.add_resource('/', name='index')
 task_resource = app.router.add_resource('/task/{uuid}', name='task')
 
+print(type(IndexView.get))
+
 index_resource.add_route("GET", IndexView.get)
 index_resource.add_route("POST", IndexView.post)
 index_resource.add_route("DELETE", IndexView.delete)

@@ -1,4 +1,5 @@
 ## 1) Backend start:
+Python 3.8.3 required.
 ```
 pip install -r requirements.txt
 python runserver.py

@@ -5,7 +5,9 @@ from uuid import uuid4
 
 import config
 
+
 db_path = config.DB_PATH
+
 
 class Task:
     
@@ -37,7 +39,7 @@ class Task:
     def delete_task(cls, uuid):
         del cls.tasks[uuid]
         cls.sync_db()
-    
+
     @classmethod
     def update_task(cls, uuid, data):
         cls.tasks[uuid].update(data)
@@ -50,7 +52,7 @@ class Task:
         return cls.tasks[uuid]
 
     @classmethod
-    def get_all_tasks(cls, status):
+    def get_all_tasks(cls, status=None):
         if cls.tasks and (status is not None):
             print(">", status)
 
@@ -61,8 +63,6 @@ class Task:
             return tasks
         else:
             return cls.tasks
-        
-
 
     @classmethod
     def delete_all_tasks(cls):
