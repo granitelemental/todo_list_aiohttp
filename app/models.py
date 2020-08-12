@@ -27,7 +27,7 @@ class Task:
             "uuid": uuid,
             "date_created": date_created,
             "name": name,
-            "is_done": False
+            "status": "active"
         }
         cls.tasks.update({uuid: task})
         cls.sync_db()
@@ -50,15 +50,13 @@ class Task:
         return cls.tasks[uuid]
 
     @classmethod
-    def get_all_tasks(cls, is_done):
-        if cls.tasks and (is_done is not None):
-            print(">", is_done)
-            
-            is_done = {"done": True, "active": False}[is_done]
-            
+    def get_all_tasks(cls, status):
+        if cls.tasks and (status is not None):
+            print(">", status)
+
             tasks = {
                 uuid: task for uuid, task in cls.tasks.items() \
-                     if task["is_done"] == is_done
+                     if task["status"] == status
             }
             return tasks
         else:

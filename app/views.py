@@ -11,8 +11,11 @@ class IndexView:
         return json_response(tasks)
 
     async def get(request):
-        is_done = request.match_info.get('is_done')
-        tasks = Task.get_all_tasks(is_done)
+        try:
+            status = request.rel_url.query['status']
+        except:
+            status = None
+        tasks = Task.get_all_tasks(status)
         return json_response(tasks)
 
     async def delete(request):
