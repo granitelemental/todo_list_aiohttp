@@ -1,6 +1,7 @@
-from uuid import uuid4
 from glob import glob
 from json import dump, load
+
+from uuid import uuid4
 
 import config
 
@@ -17,7 +18,7 @@ class Task:
     @classmethod
     def sync_db(cls):
         with open(db_path, "w") as f:
-            dump(cls.tasks, f)
+            dump(cls.tasks, f, indent=4, ensure_ascii=False)
 
     @classmethod
     def create_task(cls, name, date_created):
@@ -26,7 +27,7 @@ class Task:
             "uuid": uuid,
             "date_created": date_created,
             "name": name,
-            "done": False
+            "is_done": False
         }
         cls.tasks.update({uuid: task})
         cls.sync_db()
@@ -49,9 +50,21 @@ class Task:
         return cls.tasks[uuid]
 
     @classmethod
-    def get_all_tasks(cls):
-        cls.sync_db()
-        return cls.tasks
+    def get_all_tasks(cls, is_done):
+        if cls.tasks and (is_done is not None):
+            print(">", is_done)
+            
+            is_done = {"done": True, "active": False}[is_done]
+            
+            tasks = {
+                uuid: task for uuid, task in cls.tasks.items() \
+                     if task["is_done"] == is_done
+            }
+            return tasks
+        else:
+            return cls.tasks
+        
+
 
     @classmethod
     def delete_all_tasks(cls):

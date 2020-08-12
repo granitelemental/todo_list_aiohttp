@@ -9,7 +9,12 @@ class IndexView:
     async def get(request):
         tasks = Task.get_all_tasks()
         return json_response(tasks)
-    
+
+    async def get(request):
+        is_done = request.match_info.get('is_done')
+        tasks = Task.get_all_tasks(is_done)
+        return json_response(tasks)
+
     async def delete(request):
         Task.delete_all_tasks()
         return Response()
