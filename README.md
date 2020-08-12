@@ -10,7 +10,7 @@ python runserver.py
 ```
 {
 	"name": "Do something",
-	"date_created": 1234566 # timestamp,
+	"date_created": 1234566 # timestamp
 }
 ```
 Response example:
